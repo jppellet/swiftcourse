@@ -26,7 +26,39 @@ Quels sont les avantages et inconvénients de l’approche utilisée par Swift?
 
 ## Exercice 3 — Fonctions, closures et génériques
 
- 1. Écrivez une fonction `func fibo(n: Int) -> Int` récursive (qui s’appelle elle-même) qui calcule le n<sup>ième</sup> élément de la [suite de Fibonacci](http://fr.wikipedia.org/wiki/Suite_de_Fibonacci), où les deux premiers éléments sont 1, et où les éléments suivants sont l’addition des deux éléments précédents.<br>
+ 1. Créez une fonction `bindFirst` générique qui accepte deux arguments:
+    * n’importe quelle fonction `f` à deux arguments (le premier de type générique `A` et le deuxième de type générique `B`) et qui retourne `C`; et
+    * un argument du type `A`,
+   
+   et renvoie une fonction de type `B -> C` qui appelle `f`. Voici sa signature:
+        
+        func bindFirst<A, B, C>(f: (A, B) -> C, a: A) -> B -> C
+    Ceci par exemple devrait ensuite renvoyer la valeur `30.0`:
+    
+        let times10 = bindFirst(*, 10.0)
+        times10(3.0)
+        
+ 2. Trouvez une signature appropriée pour une fonction générique `compose` qui prend deux fonctions `f` et `g` à un argument chacune et retourne une fonction qui applique d’abord `g` puis `f` à un argument donné. Implémentez la fonction. Testez-la avec ceci, à la suite du code de la partie précédente:
+
+        let add10 = bindFirst(+, 10.0)
+        let multThenAdd = compose(add10, times10)
+        multThenAdd(3.0)        // doit renvoyer 40.0
+        let addThenMult = compose(times10, add10)
+        addThenMult(3.0)        // doit renvoyer 130.0
+        let whaaat = compose(multThenAdd, addThenMult)
+        whaaat(3.0)             // doit renvoyer 1310.0
+
+ 3. Écrivez une fonction `twice` accepte une fonction `f` et qui retourne une fonction qui applique deux fois `f` à son argument. Ceci devrait retourner `300.0`:
+    
+        let times100 = twice(times10)
+        times100(3.0)
+
+ 4. Écrivez une fonction `ntimes` accepte une fonction `f` et un `Int` `n` et qui retourne une fonction qui applique `n` fois `f` à son argument. Ceci devrait retourner `3,000,000.0`:
+    
+        let times1million = ntimes(times10, 6)
+        times1million(3)
+
+ 5. Écrivez une fonction `func fibo(n: Int) -> Int` récursive (qui s’appelle elle-même) qui calcule le n<sup>ième</sup> élément de la [suite de Fibonacci](http://fr.wikipedia.org/wiki/Suite_de_Fibonacci), où les deux premiers éléments sont 1, et où les éléments suivants sont l’addition des deux éléments précédents.<br>
 Utilisez les indications du playground pour voir combien d’appels sont faits à cette fonction pour calculer `fibo(5)`, `fibo(10)` et `fibo(12)` (n’essayez pas trop de plus grands nombres…).<br>
 Essayez de faire tourner cette fonction, qui fait le même calcul:
 
@@ -65,34 +97,3 @@ Combien de fois la boucle est-elle exécutée pour `fibo_imperative(12)`? Cette 
 Le principe est que chaque itération de la boucle est remplacé par un appel (récursif) de méthode, et chaque variable par un paramètre de la fonction.<br>
 Combien d’appels à `fibo_loop` est-ce que l’appel `fibo2(12)` génère?
 
- 2. Créez une fonction `bindFirst` générique qui accepte deux arguments:
-    * n’importe quelle fonction `f` à deux arguments (le premier de type générique `A` et le deuxième de type générique `B`) et qui retourne `C`; et
-    * un argument du type `A`,
-   
-   et renvoie une fonction de type `B -> C` qui appelle `f`. Voici sa signature:
-        
-        func bindFirst<A, B, C>(f: (A, B) -> C, a: A) -> B -> C
-    Ceci par exemple devrait ensuite renvoyer la valeur `30.0`:
-    
-        let times10 = bindFirst(*, 10.0)
-        times10(3.0)
-        
- 3. Trouvez une signature appropriée pour une fonction générique `compose` qui prend deux fonctions `f` et `g` à un argument chacune et retourne une fonction qui applique d’abord `g` puis `f` à un argument donné. Implémentez la fonction. Testez-la avec ceci, à la suite du code de la partie précédente:
-
-        let add10 = bindFirst(+, 10.0)
-        let multThenAdd = compose(add10, times10)
-        multThenAdd(3.0)        // doit renvoyer 40.0
-        let addThenMult = compose(times10, add10)
-        addThenMult(3.0)        // doit renvoyer 130.0
-        let whaaat = compose(multThenAdd, addThenMult)
-        whaaat(3.0)             // doit renvoyer 1310.0
-
- 4. Écrivez une fonction `twice` accepte une fonction `f` et qui retourne une fonction qui applique deux fois `f` à son argument. Ceci devrait retourner `300.0`:
-    
-        let times100 = twice(times10)
-        times100(3.0)
-
- 5. Écrivez une fonction `ntimes` accepte une fonction `f` et un `Int` `n` et qui retourne une fonction qui applique `n` fois `f` à son argument. Ceci devrait retourner `3,000,000.0`:
-    
-        let times1million = ntimes(times10, 6)
-        times1million(3)

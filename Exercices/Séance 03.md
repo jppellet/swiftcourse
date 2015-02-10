@@ -22,7 +22,7 @@
    
    Changez votre votre pour que `numLabels` (selon une constante dans le code plutôt que selon le nombre prédéfini 3) soient générés. Voici ce que ça donne avec `numLabels = 15`:
    
-   ![](Séance 03 Img 01.png)
+   ![](https://raw.githubusercontent.com/jppellet/swiftcourse/master/Exercices/Séance%2003%20Img%2001.png)
    
  3. Faites la même chose que 2. avec Interface Builder. :-) (OK, non, tant pis.)
 

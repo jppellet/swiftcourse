@@ -1,6 +1,6 @@
 # Développement iOS avec Swift — Séance d’exercices 5
 
-## Exercice 2 — @IBInspectable
+## Exercice 1 — @IBInspectable
 
 Dupliquez le projet du cours avec l’exemple de la terminé de la UIView personnalisée. Faites en sorte que les éléments suivants soient réglables directement dans Interface Builder pour `WaterdropView` avec l’annotation `@IBInspectable`, comme actuellement `lineWidth`:
 

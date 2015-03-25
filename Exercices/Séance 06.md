@@ -26,17 +26,17 @@ Dupliquez le projet du cours pour travailler sur les exercices suivants.
     ![](https://raw.githubusercontent.com/jppellet/swiftcourse/master/Exercices/Séance%2006%20Img%2001.png)
 
  
- 2. Ajoutez un bouton dans la barre de navigation qui crée une animation avec le texte en le bougeant de 50 pixels vers le haut. Vérifiez que l'animation fonctionne aussi dans la réflexion.
+ 2. Ajoutez un bouton dans la barre de navigation qui crée une animation avec le texte en le bougeant de 50 pixels vers le haut. Vérifiez que l'animation fonctionne aussi dans la réflexion. Vérifiez que si vous déclenchez une animation pendant qu'une autre se produit, tout marche correctement.
 
 ## Exercice 3 - CAGradientLayer
 
- 1. Changez l'arrangement les layers pour faire en sorte que la réfexion soit penchée avec un angle inverse de l'image de base, comme si elle était réfléchie dans un miroir posé par terre. Pour ce faire, vous aurez besoin de séparer la transformation 3D en deux:
-     * la translation doit être appliqué au layer principal, comme maintenant; mais
-     * la rotation ne doit être appliquée qu'au layer qui contient l'image.
+ 1. Changez l'arrangement des layers pour faire en sorte que la réfexion soit penchée avec un angle inverse de l'image de base, comme si elle était réfléchie dans un miroir posé par terre. Pour ce faire, vous aurez besoin de séparer la transformation 3D en deux:
+     * la *translation* doit être appliqué au layer principal, comme maintenant; mais
+     * la *rotation* ne doit être appliquée qu'au layer qui contient l'image.
     
     Faites attention à bien remettre les transformations à zéro sur les deux layers modifiés dans `resetButtonPressed`.
     
- 2. Ajoutez un `CAGradientLayer` par-dessus la réflexion pour enfin obtenir l'effet final ci-dessous. Créez-le comme suit:
+ 2. Ajoutez un `CAGradientLayer` par-dessus la réflexion pour enfin obtenir l'effet final ci-dessous. Créez-le comme suit et stockez-le dans une nouvelle propriété `gradientLayer`:
 
         gradientLayer = CAGradientLayer()
         gradientLayer.frame = // à vous de trouver
@@ -46,7 +46,7 @@ Dupliquez le projet du cours pour travailler sur les exercices suivants.
             UIColor.blackColor().CGColor
         ]
         
-    Trouvez où l'ajouter pour obtenir cet effet. Vous pouvez créer des layers intermédiaires si vous voulez. Attention, le layer principal de la UIView (`view.layer`) ne s'anime pas automatiquement.
+    Trouvez à quel layer l'ajouter et comment positionner sa `frame` pour obtenir cet effet. Vous pouvez créer des layers intermédiaires si vous voulez. Attention, le layer principal de la UIView (`view.layer`) ne s'anime pas automatiquement.
     
     *Indice:* en plus de la propriété `transform`, un layer a une propriété `sublayerTransform`, qui est appliquée à tous ses sous-layers. Cela évite de devoir spécifier la même transformation pour une série de sous-layers.
 
